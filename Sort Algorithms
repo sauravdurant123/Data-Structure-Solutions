@@ -1,0 +1,114 @@
+--SELECTION SORT
+-Find minumun index in an array and then swap
+for(int i=0; i<n-2; i++) {
+  int min = i;
+  for (int j = i; j < n-1; j++) {
+    if(arr[j] < arr[min]) {
+      min = j;
+    }
+  }
+  int temp = arr[min];
+  arr[min] = arr[i];
+  arr[i] = temp;
+}
+
+
+--BUBBLE SORT
+-Push the maximum to the last by adjacent swapping
+for(int i=n-1; i>=1; i--) {
+  int didSwap = 0;
+  for(int j=0; j<i-1; j++) {
+    if(arr[j] > arr[j+1]) {
+      int temp = arr[j];
+      arr[j] = arr[j+1];
+      arr[j+1] = temp;
+    }
+  }
+  if(didSwap == 0) break;
+}
+
+--INSERTION SORT
+- takes an element and places it in its current postion
+for(int i=0; i<n; i++) {
+  int j=i;
+  while(j>0 && arr[j] > arr[j-1]) {
+    int temp = arr[j];
+    arr[j] = arr[j-1];
+    arr[j-1] = temp;
+  }
+}
+
+--MERGE SORT
+-Divide and Merge
+mergeSort(arr, low, high) {
+  if( low == high) return;
+  mid = (low+high)/2;
+  mergeSort(arr, low, mid);
+  mergeSort(arr, mid+1; high);
+  merge(arr, low, mid, high);
+}
+merge(arr, low, mid, high) {
+  int[] temp = new int[high-low+1];
+  int x = 0;
+  int left = low;
+  int right = mid + 1;
+  while(left<=mid && right<=high) {
+    if(arr[left] <= arr[right]) {
+      temp[x] = arr[left];
+      x++;
+      left++;
+    }
+    else {
+      temp[x] = arr[right];
+      x++;
+      right++;
+    }
+  }
+  while(left<=mid) {
+    temp[x] = arr[left];
+    x++;
+    left++:
+  }
+  while(right<=high) {
+  temp[x] = arr[right];
+  x++;
+  right++;
+  }
+  for(int i=low; i<=high; i++) {
+    arr[i] = temp[i-low];
+  }
+}
+
+--QUICK SORT
+-Pick a pivot and place it in its correct place in the sorted array.
+-After taking pivot, smaller element on the left and larger element on the right
+-Pivot can be the 1st element, last element, median or random element
+quickSort(arr, low, high) {
+  if(low<high) {
+    part_indx = partition(arr, low, high);
+    quickSort(arr, low, part_indx-1);
+    quickSort(arr, part_indx+1, high);
+  }
+}
+partition(arr, low, high) {
+  int pivot = arr[low];
+  int i = low;
+  int j = high;
+  while(i<j) {
+    while(arr[i]<=pivot && i<=high-1) {
+      i++;
+    }
+    while(arr[j]>pivot && j>=low+1) {
+      j++;
+    }
+    if(i<j) {
+      int temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+    int temp = arr[j];
+    arr[j] = arr[low];
+    arr[low] = temp;
+  }
+  return j;
+}
